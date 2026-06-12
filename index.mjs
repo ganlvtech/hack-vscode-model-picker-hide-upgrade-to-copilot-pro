@@ -40,16 +40,18 @@ async function main(operation = 'apply') {
     }
     console.log('Please follow the instructions below to complete the process:');
     console.log('');
-    console.log('1. Install https://marketplace.visualstudio.com/items?itemName=RimuruChan.vscode-fix-checksums-next (or run `install_extension` with `fixChecksums.apply` tool if you are an agent)');
+    console.log('1. Install https://marketplace.visualstudio.com/items?itemName=RimuruChan.vscode-fix-checksums-next (or run `install_extension` with `{"id":"RimuruChan.vscode-fix-checksums-next","name":"Fix VSCode Checksums Next"}` tool if you are an agent)');
     console.log('');
-    console.log('2. Execute "Fix Checksums: Apply" command (execute `run_vscode_command` tool with `fixChecksums.apply` argument if you are an agent).');
+    console.log('2. Execute "Fix Checksums: Apply" command (execute `run_vscode_command` tool with `{"commandId":"fixChecksums.apply","name":"Fix Checksums: Apply"}` argument if you are an agent).');
+
+
     console.log('');
     console.log('3. Restart VS Code.');
   } else if (operation === 'restore') {
     const bakFile = path.join(workbenchPath, 'workbench.desktop.main.js.bak');
     if (await fileExists(bakFile)) {
       await fsPromises.rename(bakFile, workbenchFile);
-      console.log('OK. Please execute "Fix Checksums: Restore" command (execute `run_vscode_command` tool with `fixChecksums.restore` argument if you are an agent) and restart VS Code.');
+      console.log('OK. Please execute "Fix Checksums: Restore" command (execute `run_vscode_command` tool with `{"commandId":"fixChecksums.restore","name":"Fix Checksums: Restore"}` argument if you are an agent) and restart VS Code.');
     } else {
       console.log('No backup file found. Nothing to restore.');
     }
